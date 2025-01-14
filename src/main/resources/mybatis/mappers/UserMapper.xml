@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.UserMapper">
+    <select id="selectByUsername" parameterType="string" resultType="userDTO">
+        SELECT * FROM user
+        WHERE username=#{username}
+    </select>
+    <!-- 아이디 중복 검사하는 xml -->
+    <select id="validateUsername" parameterType="userDTO" resultType="userDTO">
+        SELECT * FROM user
+        WHERE username=#{username}
+    </select>
+    <!-- 닉네임 중복 검사하는 xml -->
+    <select id="validateNickname" parameterType="userDTO" resultType="userDTO">
+        SELECT * FROM user
+        WHERE nickname=#{nickname}
+    </select>
+    <insert id="register" parameterType="userDTO">
+        INSERT INTO user(username, password, nickname)
+        VALUES(#{username}, #{password}, #{nickname})
+    </insert>
+</mapper>
